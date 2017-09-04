@@ -12,10 +12,12 @@ USERS = {
     ('admin', 'admin'): {
         'eid': 'ANADMINSEID',
         'is_admin': True,
+        'username': 'admin',
         'roles': 'admin',
     },
     ('user', 'user'): {
         'eid': 'ANUSERSEID',
+        'username': 'user',
         'is_admin': False,
         'roles': 'pleb',
     }

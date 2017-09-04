@@ -28,3 +28,4 @@ services:
       - '1936:1936'
     links:
       - auth
+      - service
