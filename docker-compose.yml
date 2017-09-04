@@ -11,10 +11,20 @@ services:
       VIRTUAL_HOST: "*/auth/*"
 
   service:
-    image: auth
+    image: service
     build: ./service
     command: apistar run --port 80 --host 0.0.0.0
     ports:
       - 80
     environment:
       VIRTUAL_HOST: "*/service/*"
+
+  lb:
+    image: dockercloud/haproxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - '80:80'
+      - '1936:1936'
+    links:
+      - auth
