@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  auth:
+    image: auth
+    build: ./auth
+    command: apistar run --port 80 --host 0.0.0.0
+    ports:
+      - 80
+    environment:
+      VIRTUAL_HOST: "*/auth/*"
+
+  service:
+    image: auth
+    build: ./service
+    command: apistar run --port 80 --host 0.0.0.0
+    ports:
+      - 80
+    environment:
+      VIRTUAL_HOST: "*/service/*"
