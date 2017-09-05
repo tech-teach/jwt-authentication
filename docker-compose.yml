@@ -18,6 +18,14 @@ services:
       - 80
     environment:
       VIRTUAL_HOST: "*/service/*"
+  
+  ui:
+    image: ui
+    build: ./ui
+    ports:
+      - 80
+    environment:
+      VIRTUAL_HOST: "*/ui*"
 
   lb:
     image: dockercloud/haproxy
@@ -29,3 +37,4 @@ services:
     links:
       - auth
       - service
+      - ui

@@ -35,7 +35,10 @@ def authenticate_user(authorization: http.Header):
     scheme, token = authorization.split()
     if scheme.lower() != 'bearer':
         return None
-    return User(jwt.decode(token, PUBLIC_KEY, algorithms=['RS256']))
+    try:
+        return User(jwt.decode(token, PUBLIC_KEY, algorithms=['RS256']))
+    except jwt.InvalidTokenError:
+        return None
 
 
 def protected(user: User):
