@@ -3,6 +3,7 @@
  */
 
 import React, {Component} from 'react';
+import AuthService from '../services/auth';
 
 
 class AuthProvider extends Component {
@@ -20,11 +21,13 @@ class AuthProvider extends Component {
         })
     }
 
-    login() {
+    login(credentials) {
         // for now just set the token to whatever
-        const token = 'skdfjlskdf.sdfsdfsdf.sdfsdfsdfsdf';
-        localStorage.setItem('token', token);
-        this.setState({ token });
+        const auth = new AuthService();
+        auth.login(credentials, token => {
+            localStorage.setItem('token', token);
+            this.setState({ token });
+        }, console.error);
     }
 
     logout() {
@@ -40,7 +43,15 @@ class AuthProvider extends Component {
             );
         }
         return (
-            <p onClick={this.login.bind(this)}>The guy is not authed</p>
+            <div>
+                <p >The guy is not authed</p>
+                <button onClick={() => this.login({username: 'admin', password: 'admin'})} >
+                    login as admin
+                </button>
+                <button onClick={() => this.login({username: 'user', password: 'user'})} >
+                    login as user
+                </button>
+            </div>
         );
     }
 }
