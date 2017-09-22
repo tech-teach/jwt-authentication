@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+  auth:
+    image: auth
+    build: ./auth
+    command: apistar run --port 80 --host 0.0.0.0
+    ports:
+      - 80
+    environment:
+      VIRTUAL_HOST: "*/auth/*"
+    volumes:
+      - ./auth:/code
+
+  service:
+    image: service
+    build: ./service
+    command: apistar run --port 80 --host 0.0.0.0
+    ports:
+      - 80
+    environment:
+      VIRTUAL_HOST: "*/service/*"
+    volumes:
+      - ./service:/code
+  
+  ui:
+    image: ui
+    build:
+      context: ./ui
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000
+    environment:
+      VIRTUAL_HOST: "*/, */*.js, */*.css, */*.svg, */*.png, */sockjs-node/*, */*.ico"
+      SERVICE_PORTS: 3000
+    volumes:
+      - ./ui:/app
+
+  lb:
+    image: dockercloud/haproxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - '80:80'
+      - '1936:1936'
+    links:
+      - auth
+      - service
+      - ui

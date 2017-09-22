@@ -39,7 +39,12 @@ class AuthProvider extends Component {
     render() {
         if (this.state.token) {
             return (
-                <p onClick={this.logout.bind(this)}>The guy is authed</p>
+                <div>
+                    <p onClick={this.logout.bind(this)}>The guy is authed</p>
+                    <button onClick={() => this.logout()} >
+                        logout
+                    </button>
+                </div>
             );
         }
         return (
