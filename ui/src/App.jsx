@@ -27,7 +27,9 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <AuthProvider publicKey={PUBLIC_KEY}>
-          <AuthConsumer user={{/* will be populated by the provider */}} />
+          <AuthConsumer
+            user={{/* will be populated by the provider */}}
+            token={'' /* will be populated by the provider */ } />
         </AuthProvider>
       </div>
     );

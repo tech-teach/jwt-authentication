@@ -7,8 +7,35 @@ import PropTypes from 'prop-types';
 
 import './AuthConsumer.css';
 
+import Service from '../services/service';
+
 
 class AuthConsumer extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            protected: null,
+            secret: null,
+        }
+    }
+
+    getProtected() {
+        const service = new Service(this.props.token);
+        service.getProtected(
+            res => this.setState({protected: res}),
+            err => this.setState({protected: err})
+        );
+    }
+
+    getSecret() {
+        const service = new Service(this.props.token);
+        service.getSecret(
+            res => this.setState({secret: res}),
+            err => this.setState({secret: err})
+        );
+    }
+
     render() {
         return (
             <div className="uses-user">
@@ -24,6 +51,16 @@ class AuthConsumer extends Component {
                         )
                     }
                 </div>
+                <div className="user-box">
+                    <h3>Can communicate with other services</h3>
+                    <button onClick={this.getProtected.bind(this)}>Get protected</button>
+                    <pre>{JSON.stringify(this.state.protected, null, '  ')}</pre>
+                </div>
+                <div className="user-box">
+                    <h3>Can communicate with other services</h3>
+                    <button onClick={this.getSecret.bind(this)}>Get secret</button>
+                    <pre>{JSON.stringify(this.state.secret, null, '  ')}</pre>
+                </div>
             </div>
         )
     }
@@ -32,6 +69,7 @@ class AuthConsumer extends Component {
 
 AuthConsumer.propTypes = {
     user: PropTypes.object.isRequired,
+    token: PropTypes.string.isRequired,
 }
 
 
