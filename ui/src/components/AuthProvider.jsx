@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import jwt from 'jsonwebtoken';
 
 import AuthService from '../services/auth';
+import './AuthProvider.css';
 
 
 class AuthProvider extends Component {
@@ -80,6 +81,20 @@ class AuthProvider extends Component {
                 <button onClick={() => this.login({ username: 'user', password: 'user' })} >
                     login as user
                 </button>
+                <button onClick={() => this.login({ username: 'user', password: 'not user' })} >
+                    use faulty credentials
+                </button>
+                <button onClick={() => this.useToken('faulty.token.signature')} >
+                    use faulty token
+                </button>
+                <br/>
+                {
+                    this.state.error && (
+                        <div className="error-box">
+                            <pre>{JSON.stringify(this.state.error, null, '  ')}</pre>
+                        </div>
+                    )
+                }
             </div>
         );
     }
