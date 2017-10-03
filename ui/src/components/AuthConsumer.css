@@ -1,0 +1,14 @@
+.uses-user {
+    margin: 50px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr) ) ;
+}
+
+.user-box {
+    background-color: darkslateblue;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: left;
+}
