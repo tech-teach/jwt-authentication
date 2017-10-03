@@ -24,18 +24,10 @@ class AuthProvider extends Component {
     jwt.verify(token, this.props.publicKey, { algorithms: ['RS256'] }, (err, user) => {
       if (err) {
         localStorage.removeItem('token');
-        this.setState({
-          token: null,
-          user: null,
-          error: err,
-        });
+        this.setState({ token: null, user: null, error: err, });
       } else {
         localStorage.setItem('token', token);
-        this.setState({
-          token,
-          user,
-          error: null
-        })
+        this.setState({ token, user, error: null });
       }
     })
   }
