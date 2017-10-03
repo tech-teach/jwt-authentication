@@ -32,12 +32,12 @@ def authenticate_user(authorization: http.Header):
     """
     if authorization is None:
         return None
-    scheme, token = authorization.split()
-    if scheme.lower() != 'bearer':
-        return None
     try:
+        scheme, token = authorization.split()
+        if scheme.lower() != 'bearer':
+            return None
         return User(jwt.decode(token, PUBLIC_KEY, algorithms=['RS256']))
-    except jwt.InvalidTokenError:
+    except (ValueError, jwt.InvalidTokenError):
         return None
 
 
