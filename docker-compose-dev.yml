@@ -9,6 +9,7 @@ services:
       - 80
     environment:
       VIRTUAL_HOST: "*/auth/*"
+      VIRTUAL_HOST_WEIGHT: 10
     volumes:
       - ./auth:/code
 
@@ -20,6 +21,7 @@ services:
       - 80
     environment:
       VIRTUAL_HOST: "*/service/*"
+      VIRTUAL_HOST_WEIGHT: 10
     volumes:
       - ./service:/code
   
@@ -31,8 +33,9 @@ services:
     ports:
       - 3000
     environment:
-      VIRTUAL_HOST: "*/, */*.js, */*.css, */*.svg, */*.png, */sockjs-node/*, */*.ico"
+      VIRTUAL_HOST: "*/*"
       SERVICE_PORTS: 3000
+      VIRTUAL_HOST_WEIGHT: 0
     volumes:
       - ./ui:/app
 
