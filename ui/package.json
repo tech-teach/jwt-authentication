@@ -2,7 +2,7 @@
   "name": "ui",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://example.com/ui/",
+  "homepage": "http://example.com/",
   "dependencies": {
     "jsonwebtoken": "^8.0.1",
     "react": "^15.6.1",

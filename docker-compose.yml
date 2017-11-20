@@ -9,6 +9,7 @@ services:
       - 80
     environment:
       VIRTUAL_HOST: "*/auth/*"
+      VIRTUAL_HOST_WEIGHT: 10
 
   service:
     image: service
@@ -18,6 +19,7 @@ services:
       - 80
     environment:
       VIRTUAL_HOST: "*/service/*"
+      VIRTUAL_HOST_WEIGHT: 10
   
   ui:
     image: ui
@@ -25,7 +27,8 @@ services:
     ports:
       - 80
     environment:
-      VIRTUAL_HOST: "*/ui*"
+      VIRTUAL_HOST: "*/*"
+      VIRTUAL_HOST_WEIGHT: 0
 
   lb:
     image: dockercloud/haproxy
