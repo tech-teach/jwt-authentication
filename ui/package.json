@@ -4,11 +4,11 @@
   "private": true,
   "homepage": "http://example.com/",
   "dependencies": {
-    "jsonwebtoken": "^8.0.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "jsonwebtoken": "^8.1.0",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
     "react-scripts": "1.0.13",
-    "superagent": "^3.6.0"
+    "superagent": "^3.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
